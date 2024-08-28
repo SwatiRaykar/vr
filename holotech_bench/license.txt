@@ -1,0 +1,11 @@
+Model Information:
+* title:	HoloTech Bench
+* source:	https://sketchfab.com/3d-models/holotech-bench-67ff23c44c4c42f089917904981377fc
+* author:	TooManyDemons (https://sketchfab.com/toomanydemons)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "HoloTech Bench" (https://sketchfab.com/3d-models/holotech-bench-67ff23c44c4c42f089917904981377fc) by TooManyDemons (https://sketchfab.com/toomanydemons) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AR with A-Frame</title>
+    <!-- A-Frame library -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <!-- AR.js for A-Frame -->
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+    <!-- Gesture Detector Component -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@6.1.1/dist/aframe-extras.controls.js"></script>
+
+    <!-- Custom CSS (Optional) -->
+    <style>
+      body, html { margin: 0; overflow: hidden; }
+    </style>
+  </head>
+  <body>
+    <!-- A-Frame AR Scene -->
+    <a-scene embedded arjs>
+
+      <!-- Gesture Detector attached to the camera -->
+      <a-camera id="camera" gesture-detector look-controls></a-camera>
+      <a-light type="ambient" color="#fff"></a-light>
+      <a-light type="directional" position="-1 1 1"></a-light>
+
+      <!-- Assets (3D model) -->
+      <a-assets>
+        <a-asset-item id="earth" src="./holotech_bench/free_hq__high_quality__earth_model.glb"></a-asset-item>
+        <a-asset-item id="earth-text" src="./holotech_bench/untitled.glb"></a-asset-item>
+
+      </a-assets>
+
+      <!-- 3D Model with 360-Degree Rotation -->
+      <a-entity
+        id="earth-model"
+        gltf-model="#earth"
+        scale="1 1 1"
+        position="-2 -1 -13"  
+        rotation="0 0 0" 
+        animation="property: rotation; to: 0 360 0; loop: true; dur: 20000; easing: linear"
+      >
+      </a-entity>
+      <a-entity
+      gltf-model="#earth-text"
+      scale="1 1 1"
+      position="-3 3 -18"  
+      rotation="0 -100 -37" >
+    </a-entity>
+
+      <!-- AR Camera -->
+      <a-marker-camera preset="hiro"></a-marker-camera>
+      <a-camera position="0 0 0"></a-camera>
+
+      <script>
+        // Zoom functionality for mouse wheel
+        window.addEventListener('wheel', (event) => {
+          const camera = document.querySelector('#camera');
+          const zoomSpeed = 0.1;
+          camera.object3D.position.z += event.deltaY * zoomSpeed;
+          event.preventDefault();
+        });
+
+        // JavaScript to handle zoom in and out
+        document.addEventListener('DOMContentLoaded', function() {
+          const model = document.querySelector('#earth-model');
+          
+          // Set initial scale
+          let scale = 1;
+
+          // Function to zoom in and out
+          function zoom(delta) {
+            scale += delta;
+            scale = Math.max(0.1, Math.min(scale, 3)); // Restrict scale to a range
+            model.setAttribute('scale', `${scale} ${scale} ${scale}`);
+          }
+
+          // Add event listener to scroll (for zooming in and out)
+          document.addEventListener('wheel', function (event) {
+            const delta = event.deltaY > 0 ? -0.1 : 0.1;
+            zoom(delta);
+          });
+        });
+      </script>
+    </a-scene>
+  </body>
+</html>
